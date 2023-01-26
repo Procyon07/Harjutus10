@@ -1,0 +1,24 @@
+
+name: GitHub Actions Demo
+run-name: ${{ github.actor }} is testing out GitHub Actions
+on: [push]
+jobs:
+  mail_on_push:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Send mail
+        uses: dawidd6/action-send-mail@v3
+        with: 
+          server_address: smtp.gmail.com
+          server_port: 465
+          username: ${{secrets.MAIL_USERNAME}}
+          password: ${{secrets.MAIL_PASSWORD}}
+          subject: ALERT! SB IS PUSHING CODE INTO YOUR REPO!
+          to: kmkyngas@gmail.com
+          from: Github actions
+          body: See on väga tore üritus.
+      - run: echo "Kehtestuse looja nimi:${{github.event.pusher.name}}"
+      - run: echo "Repositooriumi nimi:${{github.repository}}"
+
+
+  
